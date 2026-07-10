@@ -1,0 +1,175 @@
+.wrap {
+  perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  max-width: 168px;
+  aspect-ratio: 3 / 2;
+  cursor: pointer;
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.35s ease, filter 0.35s ease;
+  background: 0;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+.envelope:hover:not(.locked):not(.opened) {
+  transform: rotate(0deg) translateY(-6px) scale(1.03);
+}
+
+.envelope:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 4px;
+}
+
+.body {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 250, 230, 0.55), transparent 55%),
+    linear-gradient(155deg, var(--paper) 0%, var(--paper-deep) 55%, var(--paper-shadow) 100%);
+  box-shadow:
+    0 10px 18px rgba(40, 22, 8, 0.35),
+    inset 0 0 0 1px rgba(90, 58, 30, 0.25);
+  overflow: hidden;
+}
+
+.body::before {
+  /* singed / burnt corners */
+  content: "";
+  position: absolute;
+  inset: -3px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, var(--burnt-deep) 0%, rgba(92, 58, 30, 0.35) 16%, transparent 34%),
+    radial-gradient(circle at 100% 0%, var(--burnt-deep) 0%, rgba(92, 58, 30, 0.3) 14%, transparent 30%),
+    radial-gradient(circle at 100% 100%, var(--burnt-deep) 0%, rgba(92, 58, 30, 0.4) 18%, transparent 36%),
+    radial-gradient(circle at 0% 100%, var(--burnt-deep) 0%, rgba(92, 58, 30, 0.3) 15%, transparent 32%);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+.body::after {
+  /* faint fold lines */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 48%, rgba(90, 58, 30, 0.18) 49.5%, transparent 51%),
+    linear-gradient(65deg, transparent 48%, rgba(90, 58, 30, 0.18) 49.5%, transparent 51%);
+  pointer-events: none;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 62%;
+  clip-path: polygon(0 0, 100% 0, 50% 88%);
+  background: linear-gradient(160deg, var(--paper-deep) 0%, var(--paper-shadow) 100%);
+  box-shadow: inset 0 -6px 10px -6px rgba(60, 36, 16, 0.4);
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.6, 0.1, 0.2, 1);
+  z-index: 3;
+}
+
+.opened .flap {
+  transform: rotateX(-172deg) translateY(-2px);
+}
+
+.letterPeek {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 10%;
+  top: 30%;
+  background: var(--cream-glow);
+  border: 1px solid rgba(90, 58, 30, 0.2);
+  border-radius: 2px;
+  box-shadow: 0 -4px 10px rgba(60, 36, 16, 0.15);
+  transform: translateY(6%);
+  transition: transform 0.6s ease 0.15s, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 2;
+}
+
+.opened .letterPeek {
+  transform: translateY(-22%);
+  opacity: 1;
+}
+
+.seal {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%) scale(1) rotate(-6deg);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c8555a, var(--rose-deep) 70%);
+  box-shadow: 0 3px 6px rgba(40, 10, 10, 0.5), inset 0 0 0 1px rgba(255, 220, 210, 0.25);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream-glow);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  transition: transform 0.5s ease 0.05s, opacity 0.4s ease 0.05s;
+}
+
+.opened .seal {
+  transform: translate(-50%, -50%) scale(0.4) rotate(35deg);
+  opacity: 0;
+}
+
+.number {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--ink-soft);
+  z-index: 2;
+  letter-spacing: 0.02em;
+}
+
+.locked {
+  cursor: not-allowed;
+  filter: grayscale(0.35) brightness(0.82);
+}
+
+.locked .body {
+  box-shadow: 0 6px 12px rgba(40, 22, 8, 0.25), inset 0 0 0 1px rgba(90, 58, 30, 0.2);
+}
+
+.lockBadge {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  color: var(--burnt-deep);
+  z-index: 4;
+  opacity: 0.8;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.25));
+}
+
+.label {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  text-align: center;
+}

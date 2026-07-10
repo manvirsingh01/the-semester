@@ -1,0 +1,157 @@
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 92px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.roadBg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(46, 28, 16, 0.28) 30%, rgba(46, 28, 16, 0.55) 100%);
+}
+
+.line {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 34px;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--burnt) 0,
+    var(--burnt) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  opacity: 0.65;
+  border-radius: 2px;
+}
+
+.meet {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  opacity: 0.35;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.meet.close {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.3);
+}
+
+.figure {
+  position: absolute;
+  bottom: 18px;
+  transform: translateX(-50%);
+  transition: left 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 46px;
+  height: 62px;
+}
+
+.figure svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.leg {
+  transform-origin: 50% 0%;
+  animation: swing 0.75s ease-in-out infinite;
+}
+
+.legB {
+  animation-delay: 0.375s;
+}
+
+@keyframes swing {
+  0%,
+  100% {
+    transform: rotate(18deg);
+  }
+  50% {
+    transform: rotate(-18deg);
+  }
+}
+
+.figure.hoping .leg {
+  animation-play-state: paused;
+}
+
+.figure.hoping .body {
+  animation: lean 1.6s ease-in-out infinite;
+}
+
+@keyframes lean {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-6deg) translateY(-2px);
+  }
+}
+
+.skirt {
+  transform-origin: 50% 0%;
+  animation: sway 0.75s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(6deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+
+.heart {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  font-size: 1rem;
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.figure.hoping .heart {
+  animation: floatHeart 1.8s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-8px) scale(1);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-20px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  color: var(--cream-glow);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  margin-bottom: 2px;
+}
