@@ -118,11 +118,49 @@
   border-radius: 3px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  transition: background 0.3s ease;
+  transition: background 0.5s ease, filter 0.6s ease, opacity 0.6s ease;
 }
 
-.highlight.active {
+.highlight.blurred {
+  filter: blur(6px);
+  opacity: 0.85;
+  cursor: pointer;
+  user-select: none;
+}
+
+.highlight.revealed {
   background: linear-gradient(120deg, rgba(255, 176, 120, 0.85), rgba(230, 120, 90, 0.75));
+  filter: blur(0);
+  opacity: 1;
+}
+
+.hintBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  vertical-align: 0.05em;
+  margin-right: 6px;
+  padding: 3px 12px 3px 3px;
+  border-radius: 999px;
+  background: var(--cream-glow);
+  border: 1px solid rgba(90, 58, 30, 0.3);
+  box-shadow: 0 2px 5px rgba(60, 36, 16, 0.2);
+}
+
+.hintText {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.volIcon {
+  font-size: 0.85rem;
 }
 
 .noteBtn {
@@ -131,8 +169,7 @@
   justify-content: center;
   width: 1.9em;
   height: 1.9em;
-  margin: 0 0.15em;
-  vertical-align: -0.5em;
+  flex: none;
   border-radius: 50%;
   border: 1px solid rgba(90, 58, 30, 0.35);
   background: var(--cream-glow);

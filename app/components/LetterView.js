@@ -10,18 +10,29 @@ function HighlightSegment({ text, highlightKey }) {
 
   return (
     <span className={styles.highlightWrap}>
-      <mark className={`${styles.highlight} ${isActive ? styles.active : ""}`}>
+      <span className={styles.hintBox}>
+        <button
+          type="button"
+          className={`${styles.noteBtn} ${isActive ? styles.playing : ""}`}
+          onClick={() => toggleHighlight(highlightKey)}
+          aria-label={isActive ? "Pause this song" : "Play the song for this moment"}
+          title={isActive ? "Pause" : "Play the song for this moment"}
+        >
+          {isActive ? "❚❚" : "▶"}
+        </button>
+        <span className={styles.hintText}>
+          <span className={styles.volIcon} aria-hidden="true">
+            🔊
+          </span>
+          turn up the volume
+        </span>
+      </span>
+      <mark
+        className={`${styles.highlight} ${isActive ? styles.revealed : styles.blurred}`}
+        onClick={() => !isActive && toggleHighlight(highlightKey)}
+      >
         {text}
       </mark>
-      <button
-        type="button"
-        className={`${styles.noteBtn} ${isActive ? styles.playing : ""}`}
-        onClick={() => toggleHighlight(highlightKey)}
-        aria-label={isActive ? "Pause this song" : "Play the song for this moment"}
-        title={isActive ? "Pause" : "Play the song for this moment"}
-      >
-        {isActive ? "❚❚" : "▶"}
-      </button>
     </span>
   );
 }

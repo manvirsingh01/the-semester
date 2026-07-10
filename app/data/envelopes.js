@@ -47,7 +47,7 @@ export const envelope1 = {
         text: "Then the day came when I saw her on Ganesh Chaturthi on 25 Aug 2025. She was in a yellow sari and ",
       },
       {
-        text: 'I saw her that second time and, "Whaa!" Her yellow sari and then her damn cutie face and her beautiful eyes. One thing I really liked most in her is her eyes. I got her first eye contact and I kept on removing that eye contact because I was not in good clothes, and Mridul kept on saying, "Dekh dekh vahi hai na dekh rahi hai." "Aur main thoda thoda sharmata chala gaya." Then that day many times I got eye contact with her. I was getting happy inside and started to say, "Thank you God."',
+        text: 'I saw her that second time and, "Whaa!" Her yellow sari and then her damn cutie face and her beautiful eyes and her curly hairs. One thing I really liked most in her is her eyes. I got her first eye contact and I kept on removing that eye contact because I was not in good clothes, and Mridul kept on saying, "Dekh dekh vahi hai na dekh rahi hai." "Aur main thoda thoda sharmata chala gaya." Then that day many times I got eye contact with her. I was getting happy inside and started to say, "Thank you God."',
         highlight: "yellowSari",
       },
     ],
