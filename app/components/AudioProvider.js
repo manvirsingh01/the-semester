@@ -1,15 +1,15 @@
 "use client";
 
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { SONGS } from "../data/envelopes";
 
 const AudioContext = createContext(null);
 
 export function AudioProvider({ children }) {
   const audioRef = useRef(null);
-  const [activeKey, setActiveKey] = useState(null); // null | "background" | "rickshaw" | "yellowSari"
+  const [activeSrc, setActiveSrc] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const wasBackgroundStarted = useRef(false);
+  const [backgroundSrc, setBackgroundSrc] = useState(null);
+  const backgroundStarted = useRef(false);
 
   const getAudioEl = useCallback(() => {
     if (!audioRef.current) {
@@ -22,52 +22,55 @@ export function AudioProvider({ children }) {
     return audioRef.current;
   }, []);
 
-  const playKey = useCallback(
-    (key) => {
-      const el = getAudioEl();
-      const src = SONGS[key];
+  const playSrc = useCallback(
+    (src) => {
       if (!src) return;
-      if (activeKey !== key || el.src.indexOf(src) === -1) {
+      const el = getAudioEl();
+      if (activeSrc !== src || el.src.indexOf(src) === -1) {
         el.src = src;
         el.currentTime = 0;
       }
       el.play().catch(() => {});
-      setActiveKey(key);
-      if (key === "background") wasBackgroundStarted.current = true;
+      setActiveSrc(src);
     },
-    [activeKey, getAudioEl]
+    [activeSrc, getAudioEl]
   );
 
   const pause = useCallback(() => {
-    const el = audioRef.current;
-    if (el) el.pause();
+    audioRef.current?.pause();
   }, []);
 
   // Starts the ambient theme — meant to be called from the first envelope
   // click, since that user gesture is what unlocks autoplay with sound.
-  const startBackground = useCallback(() => {
-    if (wasBackgroundStarted.current) return;
-    playKey("background");
-  }, [playKey]);
+  const startBackground = useCallback(
+    (src) => {
+      setBackgroundSrc(src);
+      if (backgroundStarted.current) return;
+      backgroundStarted.current = true;
+      playSrc(src);
+    },
+    [playSrc]
+  );
 
   // Highlighted-passage songs are exclusive: playing one always stops
   // whatever else was playing, and turning it back off returns to the
   // background theme rather than dead silence.
   const toggleHighlight = useCallback(
-    (key) => {
-      if (activeKey === key && isPlaying) {
+    (src) => {
+      if (activeSrc === src && isPlaying) {
         pause();
-        playKey("background");
+        if (backgroundSrc) playSrc(backgroundSrc);
       } else {
-        playKey(key);
+        playSrc(src);
       }
     },
-    [activeKey, isPlaying, pause, playKey]
+    [activeSrc, isPlaying, pause, playSrc, backgroundSrc]
   );
 
   const value = {
-    activeKey,
+    activeSrc,
     isPlaying,
+    backgroundSrc,
     startBackground,
     toggleHighlight,
   };

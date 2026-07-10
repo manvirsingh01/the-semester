@@ -40,8 +40,8 @@ function GirlFigure() {
 }
 
 export default function RoadProgress({ progress }) {
-  const { activeKey, isPlaying } = useAudio();
-  const hoping = isPlaying && (activeKey === "rickshaw" || activeKey === "yellowSari");
+  const { activeSrc, isPlaying, backgroundSrc } = useAudio();
+  const hoping = isPlaying && activeSrc && activeSrc !== backgroundSrc;
 
   const clamped = Math.min(1, Math.max(0, progress));
   const boyLeft = 8 + clamped * 42;

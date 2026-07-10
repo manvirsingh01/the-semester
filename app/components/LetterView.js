@@ -3,10 +3,11 @@
 import { useEffect } from "react";
 import styles from "./LetterView.module.css";
 import { useAudio } from "./AudioProvider";
+import { buildSegments } from "../../lib/letter";
 
-function HighlightSegment({ text, highlightKey }) {
-  const { activeKey, isPlaying, toggleHighlight } = useAudio();
-  const isActive = activeKey === highlightKey && isPlaying;
+function HighlightSegment({ text, song }) {
+  const { activeSrc, isPlaying, toggleHighlight } = useAudio();
+  const isActive = activeSrc === song && isPlaying;
 
   return (
     <span className={styles.highlightWrap}>
@@ -14,7 +15,7 @@ function HighlightSegment({ text, highlightKey }) {
         <button
           type="button"
           className={`${styles.noteBtn} ${isActive ? styles.playing : ""}`}
-          onClick={() => toggleHighlight(highlightKey)}
+          onClick={() => toggleHighlight(song)}
           aria-label={isActive ? "Pause this song" : "Play the song for this moment"}
           title={isActive ? "Pause" : "Play the song for this moment"}
         >
@@ -29,7 +30,7 @@ function HighlightSegment({ text, highlightKey }) {
       </span>
       <mark
         className={`${styles.highlight} ${isActive ? styles.revealed : styles.blurred}`}
-        onClick={() => !isActive && toggleHighlight(highlightKey)}
+        onClick={() => !isActive && toggleHighlight(song)}
       >
         {text}
       </mark>
@@ -58,15 +59,11 @@ export default function LetterView({ envelope, onClose }) {
         <p className={styles.dateline}>{envelope.dateline}</p>
         <h2 className={styles.heading}>{envelope.title}</h2>
         <div className={styles.body}>
-          {envelope.paragraphs.map((segments, pIdx) => (
+          {envelope.paragraphs.map((paragraph, pIdx) => (
             <p className={styles.paragraph} key={pIdx}>
-              {segments.map((seg, sIdx) =>
-                seg.highlight ? (
-                  <HighlightSegment
-                    key={sIdx}
-                    text={seg.text}
-                    highlightKey={seg.highlight}
-                  />
+              {buildSegments(paragraph).map((seg, sIdx) =>
+                seg.song ? (
+                  <HighlightSegment key={sIdx} text={seg.text} song={seg.song} />
                 ) : (
                   <span key={sIdx}>{seg.text}</span>
                 )
@@ -74,7 +71,7 @@ export default function LetterView({ envelope, onClose }) {
             </p>
           ))}
         </div>
-        <p className={styles.signOff}>— to be continued, Episode 2 is coming</p>
+        {envelope.signOff && <p className={styles.signOff}>{envelope.signOff}</p>}
       </div>
     </div>
   );

@@ -1,0 +1,268 @@
+.page {
+  min-height: 100vh;
+  padding: 32px 4vw 120px;
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.topBar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+}
+
+.viewLink {
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  color: var(--rose-deep);
+  border-bottom: 1px dashed var(--rose-deep);
+}
+
+.card {
+  background: linear-gradient(175deg, var(--cream-glow) 0%, var(--paper) 100%);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(40, 22, 8, 0.18), inset 0 0 0 1px rgba(90, 58, 30, 0.15);
+  padding: 20px clamp(16px, 3vw, 28px);
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.field label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.field input[type="text"],
+.field input[type="password"],
+.field select,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(90, 58, 30, 0.3);
+  background: #fffdf6;
+  color: var(--ink);
+}
+
+.field textarea {
+  min-height: 110px;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: var(--font-body);
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.row > .field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.tab {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 58, 30, 0.3);
+  background: rgba(255, 253, 246, 0.6);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+}
+
+.tab.active {
+  background: var(--rose);
+  color: var(--cream-glow);
+  border-color: var(--rose-deep);
+}
+
+.tab.hasContent::after {
+  content: " \2713";
+}
+
+.paragraphCard {
+  border: 1px dashed rgba(90, 58, 30, 0.3);
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 14px;
+  background: rgba(255, 253, 246, 0.5);
+}
+
+.paragraphHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.paragraphIndex {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.preview {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fffaf0;
+  border-radius: 5px;
+  border: 1px solid rgba(90, 58, 30, 0.15);
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.previewMark {
+  background: linear-gradient(120deg, rgba(255, 214, 110, 0.55), rgba(255, 190, 90, 0.65));
+  padding: 0.05em 0.15em;
+  border-radius: 3px;
+}
+
+.highlightList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.highlightRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  background: rgba(255, 214, 110, 0.25);
+  border-radius: 5px;
+  padding: 6px 8px;
+}
+
+.highlightPhrase {
+  flex: 1;
+  min-width: 160px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid rgba(90, 58, 30, 0.35);
+  background: var(--cream-glow);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #fff;
+}
+
+.btnPrimary {
+  background: var(--rose);
+  color: var(--cream-glow);
+  border-color: var(--rose-deep);
+}
+
+.btnPrimary:hover {
+  background: var(--rose-deep);
+}
+
+.btnDanger {
+  color: var(--rose-deep);
+}
+
+.btnSmall {
+  padding: 4px 9px;
+  font-size: 0.78rem;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 6px 0 10px;
+}
+
+.saveBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 14px 4vw;
+  background: rgba(46, 28, 16, 0.92);
+  backdrop-filter: blur(4px);
+}
+
+.status {
+  font-size: 0.9rem;
+  color: var(--cream-glow);
+  margin-right: auto;
+}
+
+.status.error {
+  color: #ff9b8a;
+}
+
+.songManager {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.loading {
+  padding: 60px;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--ink-soft);
+}
