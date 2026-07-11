@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./PreviewRoad.module.css";
 
 function BoyFigure() {
@@ -33,32 +34,36 @@ function GirlFigure() {
   );
 }
 
-export default function PreviewRoad({ progress, onMeet }) {
-  const clamped = Math.min(1, Math.max(0, progress));
-  const boyLeft = 8 + clamped * 42;
-  const girlLeft = 92 - clamped * 42;
-  const isClose = clamped >= 0.85;
+export default function PreviewRoad() {
+  const [met, setMet] = useState(false);
+
+  const boyLeft = met ? 50 : 8;
+  const girlLeft = met ? 50 : 92;
 
   return (
     <div className={styles.bar}>
       <div className={styles.line} />
       <button
         type="button"
-        className={`${styles.meet} ${isClose ? styles.close : ""}`}
-        onClick={onMeet}
-        aria-label="Scroll preview to where they meet"
+        className={`${styles.meet} ${met ? styles.close : ""}`}
+        onClick={() => setMet((m) => !m)}
+        aria-label={met ? "Send them back to walking" : "Make them meet"}
       >
         ♡
       </button>
 
       <div className={styles.figure} style={{ left: `${boyLeft}%` }}>
-        <span className={styles.label}>him</span>
-        <BoyFigure />
+        <div className={`${styles.figureInner} ${!met ? styles.pacing : ""}`}>
+          <span className={styles.label}>him</span>
+          <BoyFigure />
+        </div>
       </div>
 
       <div className={styles.figure} style={{ left: `${girlLeft}%` }}>
-        <span className={styles.label}>her</span>
-        <GirlFigure />
+        <div className={`${styles.figureInner} ${!met ? styles.pacing : ""}`}>
+          <span className={styles.label}>her</span>
+          <GirlFigure />
+        </div>
       </div>
     </div>
   );
