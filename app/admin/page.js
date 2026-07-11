@@ -50,14 +50,26 @@ export default function AdminPage() {
 
   const handleSave = async () => {
     setStatus({ type: "saving", message: "Saving…" });
+    // Only the envelope you're actively editing unlocks itself on save, and only
+    // once it has content. Other envelopes may be deliberately pre-written but
+    // kept hidden (e.g. "Episode 2 is coming"), so saving never unlocks those.
+    const payload = {
+      ...content,
+      envelopes: content.envelopes.map((env) => {
+        if (env.id !== activeId) return env;
+        const hasContent = env.paragraphs.some((p) => p.text.trim().length > 0);
+        return hasContent && env.locked ? { ...env, locked: false } : env;
+      }),
+    };
     try {
       const res = await fetch("/api/content", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(content),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Save failed");
+      setContent(payload);
       setStatus({ type: "saved", message: "Saved ✓ — the site now shows this." });
     } catch (err) {
       setStatus({ type: "error", message: err.message });

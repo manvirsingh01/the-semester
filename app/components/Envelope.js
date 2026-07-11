@@ -2,7 +2,7 @@
 
 import styles from "./Envelope.module.css";
 
-export default function Envelope({ id, locked, opened, onOpen }) {
+export default function Envelope({ id, title, locked, opened, onOpen }) {
   const tilt = locked || opened ? 0 : ((id % 5) - 2) * 1.6;
 
   return (
@@ -38,6 +38,7 @@ export default function Envelope({ id, locked, opened, onOpen }) {
           <span className={styles.number}>{id}</span>
         </div>
       </button>
+      {!locked && title && <span className={styles.envTitle}>{title}</span>}
       <span className={styles.label}>
         {locked ? "not written yet" : opened ? "read again" : "open me"}
       </span>

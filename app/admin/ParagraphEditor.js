@@ -4,7 +4,19 @@ import { useRef } from "react";
 import styles from "./Admin.module.css";
 import { buildSegments } from "../../lib/letter";
 
-export default function ParagraphEditor({ index, paragraph, songs, onChange, onRemove }) {
+export default function ParagraphEditor({
+  index,
+  paragraph,
+  songs,
+  onChange,
+  onRemove,
+  isDragging,
+  isDragOver,
+  onDragHandleStart,
+  onDragHandleEnd,
+  onCardDragOver,
+  onCardDrop,
+}) {
   const textareaRef = useRef(null);
 
   const handleTextChange = (e) => onChange({ ...paragraph, text: e.target.value });
@@ -35,9 +47,27 @@ export default function ParagraphEditor({ index, paragraph, songs, onChange, onR
   const segments = buildSegments(paragraph);
 
   return (
-    <div className={styles.paragraphCard}>
+    <div
+      className={`${styles.paragraphCard} ${isDragging ? styles.paragraphDragging : ""} ${
+        isDragOver ? styles.paragraphDragOver : ""
+      }`}
+      onDragOver={onCardDragOver}
+      onDrop={onCardDrop}
+    >
       <div className={styles.paragraphHead}>
-        <span className={styles.paragraphIndex}>Paragraph {index + 1}</span>
+        <span className={styles.paragraphIndex}>
+          <span
+            className={styles.dragGrip}
+            draggable
+            onDragStart={onDragHandleStart}
+            onDragEnd={onDragHandleEnd}
+            title="Drag to reorder"
+            aria-label="Drag to reorder"
+          >
+            ⠿
+          </span>
+          Paragraph {index + 1}
+        </span>
         <button
           type="button"
           className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}

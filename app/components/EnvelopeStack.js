@@ -16,6 +16,7 @@ export default function EnvelopeStack({ envelopes, site, openedIds, onOpen }) {
           <Envelope
             key={env.id}
             id={env.id}
+            title={env.title}
             opened={openedIds.has(env.id)}
             locked={env.locked || env.paragraphs.length === 0}
             onOpen={onOpen}
