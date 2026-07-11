@@ -1,0 +1,111 @@
+.bar {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  margin-top: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent 0%, rgba(46, 28, 16, 0.35) 40%, rgba(46, 28, 16, 0.62) 100%);
+  z-index: 5;
+}
+
+.line {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 24px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--burnt) 0,
+    var(--burnt) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  opacity: 0.6;
+  border-radius: 2px;
+}
+
+.meet {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  opacity: 0.35;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--cream-glow, #fff8e7);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.meet.close {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.25);
+}
+
+.figure {
+  position: absolute;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 40px;
+  transition: left 0.12s linear;
+}
+
+.figure svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.leg {
+  transform-origin: 50% 0%;
+  animation: swing 0.75s ease-in-out infinite;
+}
+
+.legB {
+  animation-delay: 0.375s;
+}
+
+@keyframes swing {
+  0%,
+  100% {
+    transform: rotate(18deg);
+  }
+  50% {
+    transform: rotate(-18deg);
+  }
+}
+
+.skirt {
+  transform-origin: 50% 0%;
+  animation: sway 0.75s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(6deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+
+.label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-hand);
+  font-size: 0.65rem;
+  color: var(--cream-glow);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1px;
+}
