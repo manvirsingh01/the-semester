@@ -9,7 +9,6 @@ export function AudioProvider({ children }) {
   const [activeSrc, setActiveSrc] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [backgroundSrc, setBackgroundSrc] = useState(null);
-  const backgroundStarted = useRef(false);
 
   const getAudioEl = useCallback(() => {
     if (!audioRef.current) {
@@ -40,16 +39,17 @@ export function AudioProvider({ children }) {
     audioRef.current?.pause();
   }, []);
 
-  // Starts the ambient theme — meant to be called from the first envelope
-  // click, since that user gesture is what unlocks autoplay with sound.
+  // Switches the ambient theme to the given envelope's own background song —
+  // called every time an envelope is opened, since each has its own track
+  // rather than one shared site-wide song. Called from the envelope click, so
+  // that user gesture is what unlocks autoplay with sound.
   const startBackground = useCallback(
     (src) => {
       setBackgroundSrc(src);
-      if (backgroundStarted.current) return;
-      backgroundStarted.current = true;
-      playSrc(src);
+      if (src) playSrc(src);
+      else pause();
     },
-    [playSrc]
+    [playSrc, pause]
   );
 
   // Highlighted-passage songs are exclusive: playing one always stops

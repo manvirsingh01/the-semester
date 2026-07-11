@@ -16,6 +16,9 @@ function validate(content) {
     if (typeof env.id !== "number") return "Every envelope needs a numeric id";
     if (typeof env.title !== "string") return `Envelope ${env.id} needs a title`;
     if (!Array.isArray(env.paragraphs)) return `Envelope ${env.id} paragraphs must be an array`;
+    if (env.backgroundSong !== undefined && typeof env.backgroundSong !== "string") {
+      return `Envelope ${env.id} backgroundSong must be a string`;
+    }
     for (const p of env.paragraphs) {
       if (typeof p.text !== "string") return `Envelope ${env.id} has a paragraph without text`;
       if (!Array.isArray(p.highlights)) return `Envelope ${env.id} has a paragraph with invalid highlights`;

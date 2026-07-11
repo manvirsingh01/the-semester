@@ -20,7 +20,7 @@ export default function HomeClient({ content }) {
     if (!envelope || envelope.locked || envelope.paragraphs.length === 0) return;
 
     setOpenedIds((prev) => new Set(prev).add(id));
-    startBackground(content.site.backgroundSong);
+    startBackground(envelope.backgroundSong);
 
     // let the flap-opening animation play before the letter appears
     window.setTimeout(() => setActiveLetterId(id), 550);

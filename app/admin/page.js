@@ -48,6 +48,21 @@ export default function AdminPage() {
     updateEnvelope({ ...activeEnvelope, media: nextMedia });
   };
 
+  const addEnvelope = () => {
+    const nextId = Math.max(0, ...content.envelopes.map((e) => e.id)) + 1;
+    const newEnvelope = {
+      id: nextId,
+      title: `Envelope ${nextId}`,
+      dateline: "",
+      locked: true,
+      signOff: "",
+      paragraphs: [],
+      backgroundSong: "",
+    };
+    setContent({ ...content, envelopes: [...content.envelopes, newEnvelope] });
+    setActiveId(nextId);
+  };
+
   const handleSave = async () => {
     setStatus({ type: "saving", message: "Saving…" });
     // Only the envelope you're actively editing unlocks itself on save, and only
@@ -126,19 +141,6 @@ export default function AdminPage() {
                 />
               </div>
             </div>
-            <div className={styles.field}>
-              <label>Background theme song</label>
-              <select
-                value={content.site.backgroundSong}
-                onChange={(e) => updateSite("backgroundSong", e.target.value)}
-              >
-                {songs.map((s) => (
-                  <option key={s.url} value={s.url}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </div>
             <div className={styles.songManager}>
               <label className={styles.btn} style={{ cursor: "pointer" }}>
                 {uploading ? "Uploading…" : "+ Upload a song"}
@@ -151,7 +153,7 @@ export default function AdminPage() {
                 />
               </label>
               <span className={styles.hint} style={{ margin: 0 }}>
-                {songs.length} song(s) available to all envelopes
+                {songs.length} song(s) available — pick a background song per envelope below
               </span>
             </div>
           </div>
@@ -175,6 +177,9 @@ export default function AdminPage() {
                   {env.id}
                 </button>
               ))}
+              <button type="button" className={`${styles.btn} ${styles.btnSmall}`} onClick={addEnvelope}>
+                + Add envelope
+              </button>
             </div>
 
             {activeEnvelope && (

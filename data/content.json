@@ -1,8 +1,7 @@
 {
   "site": {
     "title": "The Semester",
-    "subtitle": "ten envelopes, one story, kept for you",
-    "backgroundSong": "/songs/ReelAudio-68007.mp3"
+    "subtitle": "ten envelopes, one story, kept for you"
   },
   "envelopes": [
     {
@@ -11,6 +10,7 @@
       "dateline": "Tuesday, 15 August 2025",
       "locked": false,
       "signOff": "— to be continued, Episode 2 is coming",
+      "backgroundSong": "/songs/ReelAudio-99146.mp3",
       "paragraphs": [
         {
           "text": "Hi,",
