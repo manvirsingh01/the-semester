@@ -2,6 +2,7 @@
 
 import styles from "./Admin.module.css";
 import ParagraphEditor from "./ParagraphEditor";
+import MediaEditor from "./MediaEditor";
 
 export default function EnvelopeEditor({ envelope, songs, onChange }) {
   const updateField = (field, value) => onChange({ ...envelope, [field]: value });
@@ -77,6 +78,8 @@ export default function EnvelopeEditor({ envelope, songs, onChange }) {
       <button type="button" className={styles.btn} onClick={addParagraph}>
         + Add paragraph
       </button>
+
+      <MediaEditor envelope={envelope} onChange={onChange} />
     </div>
   );
 }

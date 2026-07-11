@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import styles from "./LetterView.module.css";
 import { useAudio } from "./AudioProvider";
 import { buildSegments } from "../../lib/letter";
+import MediaLayer from "./MediaLayer";
 
 function HighlightSegment({ text, song }) {
   const { activeSrc, isPlaying, toggleHighlight } = useAudio();
@@ -58,18 +59,21 @@ export default function LetterView({ envelope, onClose }) {
         </button>
         <p className={styles.dateline}>{envelope.dateline}</p>
         <h2 className={styles.heading}>{envelope.title}</h2>
-        <div className={styles.body}>
-          {envelope.paragraphs.map((paragraph, pIdx) => (
-            <p className={styles.paragraph} key={pIdx}>
-              {buildSegments(paragraph).map((seg, sIdx) =>
-                seg.song ? (
-                  <HighlightSegment key={sIdx} text={seg.text} song={seg.song} />
-                ) : (
-                  <span key={sIdx}>{seg.text}</span>
-                )
-              )}
-            </p>
-          ))}
+        <div className={styles.canvas}>
+          <div className={styles.body}>
+            {envelope.paragraphs.map((paragraph, pIdx) => (
+              <p className={styles.paragraph} key={pIdx}>
+                {buildSegments(paragraph).map((seg, sIdx) =>
+                  seg.song ? (
+                    <HighlightSegment key={sIdx} text={seg.text} song={seg.song} />
+                  ) : (
+                    <span key={sIdx}>{seg.text}</span>
+                  )
+                )}
+              </p>
+            ))}
+          </div>
+          <MediaLayer media={envelope.media ?? []} />
         </div>
         {envelope.signOff && <p className={styles.signOff}>{envelope.signOff}</p>}
       </div>

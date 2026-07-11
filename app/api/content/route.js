@@ -20,6 +20,17 @@ function validate(content) {
       if (typeof p.text !== "string") return `Envelope ${env.id} has a paragraph without text`;
       if (!Array.isArray(p.highlights)) return `Envelope ${env.id} has a paragraph with invalid highlights`;
     }
+    if (env.media !== undefined) {
+      if (!Array.isArray(env.media)) return `Envelope ${env.id} media must be an array`;
+      for (const m of env.media) {
+        if (!["image", "video", "chat"].includes(m.type)) {
+          return `Envelope ${env.id} has a media item with an invalid type`;
+        }
+        if (typeof m.x !== "number" || typeof m.y !== "number" || typeof m.width !== "number") {
+          return `Envelope ${env.id} has a media item with invalid position/size`;
+        }
+      }
+    }
   }
   return null;
 }

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./Admin.module.css";
 import EnvelopeEditor from "./EnvelopeEditor";
+import LivePreview from "./LivePreview";
 
 export default function AdminPage() {
   const [content, setContent] = useState(null);
@@ -39,6 +40,13 @@ export default function AdminPage() {
       ...content,
       envelopes: content.envelopes.map((e) => (e.id === activeId ? patch : e)),
     });
+
+  const updateMedia = (id, patch) => {
+    const media = activeEnvelope.media || [];
+    const nextMedia =
+      patch === null ? media.filter((m) => m.id !== id) : media.map((m) => (m.id === id ? { ...m, ...patch } : m));
+    updateEnvelope({ ...activeEnvelope, media: nextMedia });
+  };
 
   const handleSave = async () => {
     setStatus({ type: "saving", message: "Saving…" });
@@ -84,80 +92,86 @@ export default function AdminPage() {
         </Link>
       </div>
 
-      <div className={styles.card}>
-        <div className={styles.cardTitle}>Site settings</div>
-        <div className={styles.row}>
-          <div className={styles.field}>
-            <label>Site title</label>
-            <input
-              type="text"
-              value={content.site.title}
-              onChange={(e) => updateSite("title", e.target.value)}
-            />
+      <div className={styles.pageBody}>
+        <div className={styles.mainCol}>
+          <div className={styles.card}>
+            <div className={styles.cardTitle}>Site settings</div>
+            <div className={styles.row}>
+              <div className={styles.field}>
+                <label>Site title</label>
+                <input
+                  type="text"
+                  value={content.site.title}
+                  onChange={(e) => updateSite("title", e.target.value)}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Subtitle</label>
+                <input
+                  type="text"
+                  value={content.site.subtitle}
+                  onChange={(e) => updateSite("subtitle", e.target.value)}
+                />
+              </div>
+            </div>
+            <div className={styles.field}>
+              <label>Background theme song</label>
+              <select
+                value={content.site.backgroundSong}
+                onChange={(e) => updateSite("backgroundSong", e.target.value)}
+              >
+                {songs.map((s) => (
+                  <option key={s.url} value={s.url}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className={styles.songManager}>
+              <label className={styles.btn} style={{ cursor: "pointer" }}>
+                {uploading ? "Uploading…" : "+ Upload a song"}
+                <input
+                  type="file"
+                  accept="audio/*"
+                  style={{ display: "none" }}
+                  onChange={handleUpload}
+                  disabled={uploading}
+                />
+              </label>
+              <span className={styles.hint} style={{ margin: 0 }}>
+                {songs.length} song(s) available to all envelopes
+              </span>
+            </div>
           </div>
-          <div className={styles.field}>
-            <label>Subtitle</label>
-            <input
-              type="text"
-              value={content.site.subtitle}
-              onChange={(e) => updateSite("subtitle", e.target.value)}
-            />
+
+          <div className={styles.card}>
+            <div className={styles.cardTitle}>Envelopes</div>
+            <p className={styles.hint}>
+              Tabs with a checkmark already have paragraphs written. An envelope only appears
+              openable on the site once it&apos;s unlocked <em>and</em> has at least one paragraph.
+            </p>
+            <div className={styles.tabs}>
+              {content.envelopes.map((env) => (
+                <button
+                  key={env.id}
+                  type="button"
+                  className={`${styles.tab} ${env.id === activeId ? styles.active : ""} ${
+                    env.paragraphs.length ? styles.hasContent : ""
+                  }`}
+                  onClick={() => setActiveId(env.id)}
+                >
+                  {env.id}
+                </button>
+              ))}
+            </div>
+
+            {activeEnvelope && (
+              <EnvelopeEditor envelope={activeEnvelope} songs={songs} onChange={updateEnvelope} />
+            )}
           </div>
         </div>
-        <div className={styles.field}>
-          <label>Background theme song</label>
-          <select
-            value={content.site.backgroundSong}
-            onChange={(e) => updateSite("backgroundSong", e.target.value)}
-          >
-            {songs.map((s) => (
-              <option key={s.url} value={s.url}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.songManager}>
-          <label className={styles.btn} style={{ cursor: "pointer" }}>
-            {uploading ? "Uploading…" : "+ Upload a song"}
-            <input
-              type="file"
-              accept="audio/*"
-              style={{ display: "none" }}
-              onChange={handleUpload}
-              disabled={uploading}
-            />
-          </label>
-          <span className={styles.hint} style={{ margin: 0 }}>
-            {songs.length} song(s) available to all envelopes
-          </span>
-        </div>
-      </div>
 
-      <div className={styles.card}>
-        <div className={styles.cardTitle}>Envelopes</div>
-        <p className={styles.hint}>
-          Tabs with a checkmark already have paragraphs written. An envelope only appears
-          openable on the site once it&apos;s unlocked <em>and</em> has at least one paragraph.
-        </p>
-        <div className={styles.tabs}>
-          {content.envelopes.map((env) => (
-            <button
-              key={env.id}
-              type="button"
-              className={`${styles.tab} ${env.id === activeId ? styles.active : ""} ${
-                env.paragraphs.length ? styles.hasContent : ""
-              }`}
-              onClick={() => setActiveId(env.id)}
-            >
-              {env.id}
-            </button>
-          ))}
-        </div>
-
-        {activeEnvelope && (
-          <EnvelopeEditor envelope={activeEnvelope} songs={songs} onChange={updateEnvelope} />
-        )}
+        <LivePreview envelope={activeEnvelope} onMediaChange={updateMedia} />
       </div>
 
       <div className={styles.saveBar}>

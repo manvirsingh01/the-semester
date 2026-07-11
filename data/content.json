@@ -2,7 +2,7 @@
   "site": {
     "title": "The Semester",
     "subtitle": "ten envelopes, one story, kept for you",
-    "backgroundSong": "/songs/ReelAudio-99146.mp3"
+    "backgroundSong": "/songs/ReelAudio-68007.mp3"
   },
   "envelopes": [
     {
@@ -60,7 +60,45 @@
         }
       ]
     },
-    { "id": 2, "title": "Envelope 2", "dateline": "", "locked": true, "signOff": "", "paragraphs": [] },
+    {
+      "id": 2,
+      "title": "Envelope 2",
+      "dateline": "",
+      "locked": true,
+      "signOff": "",
+      "paragraphs": [
+        {
+          "text": "Now, as time started to spend in the college, we just had some beautiful eye contact. Now the final day has come. I have my line, I just need to say it. I have played basketball, I have had dinner, and now I was just waiting for her so that I can say it to her. After dinner, I started to search for her and I found out she was sitting near her hostel with her friend. I said to Wasim, “Bhai dekh, jab vo log chalna shuru karenge tab hum bhi chalenge, tab tak isi road pe rehte hain.”",
+          "highlights": []
+        },
+        {
+          "text": "Then I saw they started to walk, and they were walking in the same lane as we were. Suddenly, they changed lanes as we came close to them; that’s how they did it two to three times. Then I said to Wasim, “Bhai dekh, inko baat nahi karni. Tu yahi ruk, main akela jaata hoon. Agar hua toh baat kar loonga.” Then I left Wasim and started for the last attempt, and finally, I got the chance. I said, “Excuse me,” and she said, “Haan.”\n",
+          "highlights": []
+        },
+        {
+          "text": "Then I said, “Aap kaha se ho?” Then her friend beside her started to stare at me. I said to her, “2 min please.” Then she said, “Haryana.” Then I started to say my lines: “I want to tell you that I have a crush on you. I found you an interesting person, and you are very pretty. Can we go on a walk?” As soon as I said that, she started to look here and there, and then I said, “You can take your time,” and then I moved back and went toward the badminton court. My friends were there, and as I reached there, everyone was asking what happened. Before I was about to, I said, “Bhai, ya toh win hoga ya learn hoga.” Then Mridul, Rao, and Adi—everyone was asking what happened. I said, “Maine aisa bola, poora bataya, aur bola, ‘Take your time,’ bolke aa gaya.” Then I said, “Ab pata nahi win hoga ya learn hoga.” Then Mridul said, “Reaction kya tha?” I said, “Has rahi thi, main ‘Take your time’ bolke aa gaya.” Then Mridul said, “Sahi hai, win hai, win hai!”\n",
+          "highlights": [
+            {
+              "phrase": "hen I said, “Aap kaha se ho?” Then her friend beside her started to stare at me. I said to her, “2 min please.” Then she said, “Haryana.” Then I started to say my lines: “I want to tell you that I have a crush on you. I found you an interesting person, and you are very pretty. Can we go on a walk?”",
+              "song": "/songs/ReelAudio-73880.mp3"
+            }
+          ]
+        },
+        {
+          "text": "And then we all went to the hostel and had a nice sleep. Then the second day happened; we were waiting for something she would say. Then 3rd day, then 4th day. Finally, I thought, “Apne ko hi jana chahiye, poochke aate hain.” Then on that day, me and my friends were standing on that front road of the mess and we waited for around 1 hour, and then she came from the mess. Everyone said, “Ja, ja, baat karke aa.” Before I went, I had the lines I had prepared again—same process—but this time Borade added something. He said to me, “Agar tu kuch bole aur woh peeche jaane lage, toh samajh lena na hai.” Basically, he gave me the knowledge of boy language. Now, I was on my way to speak to her. As I reached, I said, “Nainsi, baat karni hai.” As I said this much, she turned and started saying, “Nahi, nahi, baat nahi karni.” And she became tensed and started being frustrated—maybe she had a fight with someone or her mood was not right. I saw her legs; she was going backwards, and I got my answer. Then I said, “Okay, okay,” and came back. All this happened in less than 60 seconds, and then my friend asked what happened: “Itna jaldi kyun aa gaya?” And I said, “Bhai, learn hai, learn hai, mana kar diya.” That I got rejected for the 3rd time. To be honest, that day I felt very, very bad, and my chest became heavy because I genuinely liked her very much. And I didn't tell anybody; I was just reacting normally as if nothing happened. Then the night ended.\n",
+          "highlights": [
+            {
+              "phrase": "of boy language. Now, I was on my way to speak to her. As I reached, I said, “Nainsi, baat karni hai.” As I said this much, she turned and started saying, “Nahi, nahi, baat nahi karni.” And she became tensed and started being frustrated—maybe she had a fight with someone or her mood was not right. I saw her legs; she was going backwards, and I got my answer. Then I said, “Okay, okay,” and came back. All this happened in less than 60 seconds, and then my friend asked what happened: “Itna jaldi kyun aa gaya?” And I said, “Bhai, learn hai, learn hai, mana kar diya.” That I got rejected for the 3rd time",
+              "song": "/songs/ReelAudio-61680.mp3"
+            }
+          ]
+        },
+        {
+          "text": "Before sleep, my roommate came to me and asked, “Bhai, aaj kisi ladki ko propose karke aaya hai kya? Kya usne tujhe mana kar diya?” I said, “Nahi, bhai.” And the next morning as I got into the mess, everyone was staring at me. I was like, “Bhai, bezzati ho gayi.” During lunch time, one of my juniors, Vaibhav, came to me and said, “Bhaiya, yeh kya kar diya? Aise nahi karna chahiye na.” I said, “Bhai, jo tu sun raha hai woh galat hai.” And then every day I used to hear all this... some, some have done this... Episode 3 coming soon.\n",
+          "highlights": []
+        }
+      ]
+    },
     {
       "id": 3,
       "title": "Envelope 3",

@@ -1,0 +1,91 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.item.interactive {
+  cursor: pointer;
+}
+
+.item.selected {
+  outline: 2px dashed var(--rose);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 8px 20px rgba(40, 22, 8, 0.35), 0 0 0 6px #fffdf6, 0 0 0 7px rgba(90, 58, 30, 0.25);
+  transform: rotate(-1.5deg);
+}
+
+.caption {
+  margin-top: 6px;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.grip {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px 6px 0 0;
+  background: var(--rose);
+  color: var(--cream-glow);
+  font-size: 0.85rem;
+  cursor: grab;
+  touch-action: none;
+  box-shadow: 0 -2px 4px rgba(60, 36, 16, 0.25);
+}
+
+.grip:active {
+  cursor: grabbing;
+}
+
+.removeBtn {
+  position: absolute;
+  top: -22px;
+  right: -10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(90, 58, 30, 0.35);
+  background: var(--cream-glow);
+  color: var(--rose-deep);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(60, 36, 16, 0.25);
+}
+
+.resizeHandle {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--rose-deep);
+  border: 2px solid var(--cream-glow);
+  box-shadow: 0 2px 4px rgba(60, 36, 16, 0.3);
+  cursor: nwse-resize;
+  touch-action: none;
+}
