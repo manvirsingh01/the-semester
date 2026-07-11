@@ -72,6 +72,7 @@ export default function HomeClient({ content }) {
         openedIds={openedIds}
         onOpen={handleOpen}
       />
+      <div className={styles.roadSpacer} />
       <RoadProgress progress={scrollProgress} onMeet={handleMeet} />
       {activeEnvelope && (
         <LetterView envelope={activeEnvelope} onClose={handleClose} />
