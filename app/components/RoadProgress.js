@@ -39,7 +39,7 @@ function GirlFigure() {
   );
 }
 
-export default function RoadProgress({ progress }) {
+export default function RoadProgress({ progress, onMeet }) {
   const { activeSrc, isPlaying, backgroundSrc } = useAudio();
   const hoping = isPlaying && activeSrc && activeSrc !== backgroundSrc;
 
@@ -52,9 +52,15 @@ export default function RoadProgress({ progress }) {
     <div className={styles.bar}>
       <div className={styles.roadBg} />
       <div className={styles.line} />
-      <div className={`${styles.meet} ${isClose ? styles.close : ""}`} style={{ left: "50%" }}>
+      <button
+        type="button"
+        className={`${styles.meet} ${isClose ? styles.close : ""}`}
+        style={{ left: "50%" }}
+        onClick={onMeet}
+        aria-label="Scroll to where they meet"
+      >
         ♡
-      </div>
+      </button>
 
       <div
         className={`${styles.figure} ${hoping ? styles.hoping : ""}`}
