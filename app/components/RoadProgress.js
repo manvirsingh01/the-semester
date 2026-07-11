@@ -39,14 +39,13 @@ function GirlFigure() {
   );
 }
 
-export default function RoadProgress({ progress, onMeet }) {
+export default function RoadProgress({ restProgress, met, onMeet }) {
   const { activeSrc, isPlaying, backgroundSrc } = useAudio();
   const hoping = isPlaying && activeSrc && activeSrc !== backgroundSrc;
 
-  const clamped = Math.min(1, Math.max(0, progress));
-  const boyLeft = 8 + clamped * 42;
-  const girlLeft = 92 - clamped * 42;
-  const isClose = clamped >= 0.85;
+  const clamped = Math.min(1, Math.max(0, restProgress));
+  const boyLeft = met ? 50 : 8 + clamped * 42;
+  const girlLeft = met ? 50 : 92 - clamped * 42;
 
   return (
     <div className={styles.bar}>
@@ -54,10 +53,10 @@ export default function RoadProgress({ progress, onMeet }) {
       <div className={styles.line} />
       <button
         type="button"
-        className={`${styles.meet} ${isClose ? styles.close : ""}`}
+        className={`${styles.meet} ${met ? styles.close : ""}`}
         style={{ left: "50%" }}
         onClick={onMeet}
-        aria-label="Scroll to where they meet"
+        aria-label={met ? "Send them back to walking" : "Make them meet"}
       >
         ♡
       </button>
@@ -66,14 +65,18 @@ export default function RoadProgress({ progress, onMeet }) {
         className={`${styles.figure} ${hoping ? styles.hoping : ""}`}
         style={{ left: `${boyLeft}%` }}
       >
-        <span className={styles.label}>him</span>
-        <span className={styles.heart}>♥</span>
-        <BoyFigure />
+        <div className={`${styles.figureInner} ${!met ? styles.pacing : ""}`}>
+          <span className={styles.label}>him</span>
+          <span className={styles.heart}>♥</span>
+          <BoyFigure />
+        </div>
       </div>
 
       <div className={styles.figure} style={{ left: `${girlLeft}%` }}>
-        <span className={styles.label}>her</span>
-        <GirlFigure />
+        <div className={`${styles.figureInner} ${!met ? styles.pacing : ""}`}>
+          <span className={styles.label}>her</span>
+          <GirlFigure />
+        </div>
       </div>
     </div>
   );

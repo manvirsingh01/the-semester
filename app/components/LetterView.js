@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import styles from "./LetterView.module.css";
 import { useAudio } from "./AudioProvider";
 import { buildSegments } from "../../lib/letter";
@@ -39,33 +39,16 @@ function HighlightSegment({ text, song }) {
   );
 }
 
-export default function LetterView({ envelope, onClose, sheetRef, onScrollDelta }) {
-  const localSheetRef = useRef(null);
-  const resolvedSheetRef = sheetRef || localSheetRef;
-  const lastScrollTopRef = useRef(0);
-
+export default function LetterView({ envelope, onClose }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  useEffect(() => {
-    const el = resolvedSheetRef.current;
-    if (!el || !onScrollDelta) return;
-    lastScrollTopRef.current = el.scrollTop;
-    const onScroll = () => {
-      const delta = el.scrollTop - lastScrollTopRef.current;
-      lastScrollTopRef.current = el.scrollTop;
-      onScrollDelta(delta);
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [resolvedSheetRef, onScrollDelta]);
-
   return (
     <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.sheet} ref={resolvedSheetRef} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           className={styles.close}
