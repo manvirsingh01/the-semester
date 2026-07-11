@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import styles from "./Admin.module.css";
 import { buildSegments } from "../../lib/letter";
+import SongPreviewButton from "./SongPreviewButton";
 
 export default function ParagraphEditor({
   index,
@@ -102,6 +103,7 @@ export default function ParagraphEditor({
                   </option>
                 ))}
               </select>
+              <SongPreviewButton src={h.song} label={songs.find((s) => s.url === h.song)?.name} />
               <button
                 type="button"
                 className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}

@@ -277,6 +277,80 @@
   margin: 6px 0 10px;
 }
 
+.songSelectRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.songSelectRow select {
+  flex: 1;
+}
+
+.songList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.songRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background: rgba(255, 253, 246, 0.6);
+  border: 1px solid rgba(90, 58, 30, 0.15);
+}
+
+.songName {
+  font-size: 0.85rem;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.previewBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+  border: 1px solid rgba(90, 58, 30, 0.35);
+  background: var(--cream-glow);
+  color: var(--rose-deep);
+  cursor: pointer;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 4px rgba(60, 36, 16, 0.2);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.previewBtn:hover {
+  transform: scale(1.08);
+}
+
+.previewBtnPlaying {
+  background: var(--rose);
+  color: var(--cream-glow);
+  animation: previewPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes previewPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(166, 61, 64, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(166, 61, 64, 0);
+  }
+}
+
 .saveBar {
   position: fixed;
   left: 0;

@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./Admin.module.css";
 import EnvelopeEditor from "./EnvelopeEditor";
 import LivePreview from "./LivePreview";
+import SongPreviewButton from "./SongPreviewButton";
 
 export default function AdminPage() {
   const [content, setContent] = useState(null);
@@ -156,6 +157,16 @@ export default function AdminPage() {
                 {songs.length} song(s) available — pick a background song per envelope below
               </span>
             </div>
+            {songs.length > 0 && (
+              <div className={styles.songList}>
+                {songs.map((s) => (
+                  <div className={styles.songRow} key={s.url}>
+                    <SongPreviewButton src={s.url} label={s.name} />
+                    <span className={styles.songName}>{s.name}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className={styles.card}>

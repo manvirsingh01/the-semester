@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Admin.module.css";
 import ParagraphEditor from "./ParagraphEditor";
 import MediaEditor from "./MediaEditor";
+import SongPreviewButton from "./SongPreviewButton";
 
 export default function EnvelopeEditor({ envelope, songs, onChange }) {
   const [dragIndex, setDragIndex] = useState(null);
@@ -72,17 +73,23 @@ export default function EnvelopeEditor({ envelope, songs, onChange }) {
 
       <div className={styles.field}>
         <label>Background song</label>
-        <select
-          value={envelope.backgroundSong || ""}
-          onChange={(e) => updateField("backgroundSong", e.target.value)}
-        >
-          <option value="">no background song</option>
-          {songs.map((s) => (
-            <option key={s.url} value={s.url}>
-              {s.name}
-            </option>
-          ))}
-        </select>
+        <div className={styles.songSelectRow}>
+          <select
+            value={envelope.backgroundSong || ""}
+            onChange={(e) => updateField("backgroundSong", e.target.value)}
+          >
+            <option value="">no background song</option>
+            {songs.map((s) => (
+              <option key={s.url} value={s.url}>
+                {s.name}
+              </option>
+            ))}
+          </select>
+          <SongPreviewButton
+            src={envelope.backgroundSong}
+            label={songs.find((s) => s.url === envelope.backgroundSong)?.name}
+          />
+        </div>
         <span className={styles.hint} style={{ margin: 0 }}>
           Plays while this envelope&apos;s letter is open — each envelope can have its own song.
         </span>
