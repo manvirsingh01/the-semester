@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Admin.module.css";
 
 const newId = () => `m${Date.now()}${Math.random().toString(36).slice(2, 7)}`;
+const MAX_MEDIA_BYTES = 100 * 1024 * 1024;
 
 export default function MediaEditor({ envelope, onChange }) {
   const media = envelope.media || [];
@@ -17,6 +18,11 @@ export default function MediaEditor({ envelope, onChange }) {
   const upload = async (e, type) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (file.size > MAX_MEDIA_BYTES) {
+      alert("That file is too large — the limit is 100MB.");
+      e.target.value = "";
+      return;
+    }
     setUploading(type);
     const form = new FormData();
     form.append("file", file);
