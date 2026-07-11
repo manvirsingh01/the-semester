@@ -22,8 +22,8 @@ export default function HomeClient({ content }) {
   const restProgress = Math.min(MAX_REST_PROGRESS, openedIds.size / totalEnvelopes);
 
   useEffect(() => {
-    // each envelope gets its own fresh chance to trigger the meeting
-    setMet(false);
+    // Episode 9 is where they actually meet; every other envelope resets the walk
+    setMet(activeLetterId === 9);
   }, [activeLetterId]);
 
   const handleMeet = () => setMet((m) => !m);

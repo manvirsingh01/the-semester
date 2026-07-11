@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./PreviewRoad.module.css";
 
 function BoyFigure() {
@@ -34,8 +34,13 @@ function GirlFigure() {
   );
 }
 
-export default function PreviewRoad() {
+export default function PreviewRoad({ envelope }) {
   const [met, setMet] = useState(false);
+
+  useEffect(() => {
+    // Episode 9 is where they actually meet; every other envelope resets the walk
+    setMet(envelope?.id === 9);
+  }, [envelope?.id]);
 
   const boyLeft = met ? 50 : 8;
   const girlLeft = met ? 50 : 92;

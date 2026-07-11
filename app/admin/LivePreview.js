@@ -41,7 +41,7 @@ export default function LivePreview({ envelope, onMediaChange }) {
           {envelope.signOff && <p className={letterStyles.signOff}>{envelope.signOff}</p>}
         </div>
       </div>
-      <PreviewRoad />
+      <PreviewRoad envelope={envelope} />
     </div>
   );
 }
