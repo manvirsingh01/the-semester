@@ -64,7 +64,7 @@
       "id": 2,
       "title": "Envelope 2",
       "dateline": "",
-      "locked": true,
+      "locked": false,
       "signOff": "",
       "paragraphs": [
         {
